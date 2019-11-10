@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<title>HackNJIT</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript">
+    var convert = { "1": "Bottom", "2": "Right", "3": "Left" }
+</script>
+<style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Montserrat", sans-serif
+    }
+
+    .w3-row-padding img {
+        margin-bottom: 12px
+    }
+
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {
+        width: 120px;
+        background: #222;
+    }
+
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {
+        margin-left: 120px
+    }
+
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {
+        #main {
+            margin-left: 0
+        }
+    }
+
+    table {
+        font-family: "Montserrat", sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        align-content: center;
+        background-color: #ffffff;
+        color: #706161;
+    }
+
+    tr:nth-child(odd) {
+        align-content: center;
+        background-color: #666464;
+        color: #ffffff;
+    }
+</style>
+
+<body class="w3-black">
+
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+        <!-- Avatar image in top left corner -->
+        <!-- img src="/w3images/avatar_smoke.jpg" style="width:100%"-->
+        <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+            <i class="fa fa-home w3-xxlarge"></i>
+            <p>HOME</p>
+        </a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-black">
+            <i class="fa fa-user w3-xxlarge"></i>
+            <p>ABOUT</p>
+        </a>
+        <a href="#demo" class="w3-bar-item w3-button w3-padding-large w3-black">
+            <i class="fa fa-eye w3-xxlarge"></i>
+            <p>DEMO</p>
+        </a>
+        <a href="#team" class="w3-bar-item w3-button w3-padding-large w3-black">
+            <i class="fa fa-envelope w3-xxlarge"></i>
+            <p>TEAM</p>
+        </a>
+    </nav>
+
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+        <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+            <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+            <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+            <a href="#demo" class="w3-bar-item w3-button" style="width:25% !important">DEMO</a>
+            <a href="#team" class="w3-bar-item w3-button" style="width:25% !important">TEAM</a>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="w3-padding-large" id="main">
+
+        <!-- Header/Home -->
+        <header class="w3-container w3-padding-10 w3-center w3-black" id="home">
+            <h1 class="w3-jumbo">Pressure Ulcers Tracker</h1>
+            <p>Tracking real time data of various patients using Accelerometer & Gyroscope.</p>
+        </header>
+
+        <!-- About Section -->
+        <div class="w3-content w3-justify w3-padding-64" id="about">
+
+            <h2>Project Overview</h2>
+            <hr style="width:250px" class="w3-opacity">
+            <p>We are using x and y sensors to detect data of patients having ab disease. That data is being tracked in
+                real time and stored in Azure Dashboard.</p>
+
+            <h2>Data from Azure Dashboard</h2>
+            <hr style="width:430px" class="w3-opacity">
+
+            <!-- End About Section -->
+        </div>
+
+        <!-- Demo Section -->
+
+        <script type="text/javascript">
+            var data = null
+            // const xhr = new XMLHttpRequest();
+            // xhr.onload = function () {
+            //     if (this.status = 200) {
+            //         console.log(this.responseText)
+            //     } else {
+            //         console.warn("Did not receive 200 OK from response!")
+            //     }
+            // };
+            // xhr.open('get', 'https://api.thingspeak.com/channels/209268/fields/2.json?results=2');
+            // xhr.send();
+            window.setInterval(function () {
+                // console.log("fuiuytfrdtyuhij")
+                /// call your function here
+                check_sensor_data()
+            }, 1000);
+
+
+            function check_sensor_data() {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    if (this.status = 200) {
+                        var Json_string = JSON.parse(this.responseText)
+                        document.getElementById("current_position").innerHTML = convert[Json_string['feeds'][0]['field2']];
+                        // x.innerHTML=
+                        console.log(Json_string['feeds'][0]['field2'])
+
+                    } else {
+                        console.warn("Did not receive 200 OK from response!")
+                    }
+                };
+                xhr.open('get', 'https://api.thingspeak.com/channels/209268/fields/2.json?results=2');
+                xhr.send();
+                // body...
+            }
+        </script>
+
+        <div class="w3-content w3-justify" id="demo">
+            <table>
+                <tr>
+                    <th>Patient Id</th>
+                    <th>Patient Name</th>
+                    <th>Timer</th>
+                    <th>Current Position</th>
+                </tr>
+                <tr>
+                    <td>2130</td>
+                    <td>Alfreds Futterkiste</td>
+                    <td>1:50</td>
+                    <td>Bottom</td>
+                </tr>
+                <tr>
+                    <td>2290</td>
+                    <td>Centro comercial Moctezuma</td>
+                    <td>1:00</td>
+                    <td>Right</td>
+                </tr>
+                <tr>
+                    <td>4323</td>
+                    <td>Ernst Handel</td>
+                    <td>0:45</td>
+                    <td>Left</td>
+                </tr>
+                <tr>
+                    <td>7325</td>
+                    <td>Island Trading</td>
+                    <td>0:30</td>
+                    <td>Right</td>
+                </tr>
+                <tr>
+                    <td>4232</td>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Live</td>
+                    <td id="current_position">Dont Know</td>
+                </tr>
+                <!-- <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Laughing Bacchus Winecellars</td>
+                    <td>Yoshi Tannamuri</td>
+                    <td>Canada</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr>
+                <tr>
+                    <td>Magazzini Alimentari Riuniti</td>
+                    <td>Giovanni Rovelli</td>
+                    <td>Italy</td>
+                </tr> -->
+            </table>
+            <!--End ot Table-->
+
+        </div>
+        <!-- End of Demo Section-->
+
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+        <span style="display:inline-block; width: 100;"></span>
+
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        &emsp;&emsp;&emsp;
+
+        <div class="w3-content w3-justify" id="team">
+            <h2>Team Members</h2>
+            <hr style="width:250px" class="w3-opacity">
+            <p> Created by Himanshu Patel, Ali Asgar Tashrifwala & Valmik Kalathia</p>
+        </div>
+
+        <!-- END PAGE CONTENT -->
+    </div>
+
+</body>
+
+</html>

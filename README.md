@@ -16,9 +16,7 @@ How we built it?
 
 We used MPU6050 with RaspberryPi over WiFI and connected it to the IoT dashboard to send data through the cloud. We displayed it on to our personal website specifically designed for nurses. Nurses can track the patient movements & duration in that position. This will allow them to be more efficient in serving patients.
 
-As per Google search, every year around 200,000 people die due to pressure ulcer and the solution promises to save the lives of 90% of the patients suffering from Pressure Ulcer. This practice can cure the patients within 2-3 years and they can start to lead a normal life.
-
-ultrasonic, gyroscope, accelerometer, etc sensors along with Fitbit watch data to detect the patient's movements
+As per Google search, every year around 200,000 people die due to pressure ulcer and the solution promises to save the lives of 90% of the patients suffering from Pressure Ulcer. This practice can cure the patients within 2-3 years and they can start to lead a normal life. We used ultrasonic, gyroscope, accelerometer, etc sensors along with Fitbit watch data to detect the patient's movements
 
 Challenges we ran into
 
@@ -31,12 +29,14 @@ Accomplishments that we're proud of
 We were able to develop a POC for this critical health issue. 
 We were able to use IoT devices (sensors) to accomplish this project.
 
-What we learned
+What we learned ?
+
 How to create an Azure function How to trigger Azure function using an HTTP request? 
 How to install Windows 10 IoT core in RaspberryPi ? 
 How to AJAX to load the JSON data on the webpage in real-time without refreshing the page
 
-What's next for Healthcare System for Pressure Ulcers Patients
+What's next for Healthcare System for Pressure Ulcers Patients ?
+
 Notification on the Mobile app (Android/iOS) to the Nurse's phone and patient's relatives/caretaker to change the patient's position.
 
 Built With
